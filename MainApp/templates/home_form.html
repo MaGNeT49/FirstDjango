@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <br>
+    <form action="/login/" method="post" >
+        {% csrf_token %}
+        {% if request.user.is_authenticated %}
+        {% else %}
+            <button type="submit">Войти</button>
+        {% endif %}
+    </form>
+    <form action="/register/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Создать пользователя">
+    </form>
+    <br>
+    <form action="/logout/" method="post">
+        {% csrf_token %}
+        {% if request.user.is_authenticated %}
+            <button type="submit">Logout</button>
+        {% else %}
+        {% endif %}
+    </form>
+    {% if request.user.is_authenticated %}
+        Welcome, {{request.user.username}}
+    {% else %}
+    {% endif %}
+</body>
+</html>
